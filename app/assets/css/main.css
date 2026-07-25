@@ -1,0 +1,234 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/600.css";
+@import "@fontsource/jetbrains-mono/700.css";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+@import "@fontsource/manrope/800.css";
+@import "@fontsource/vazirmatn/400.css";
+@import "@fontsource/vazirmatn/500.css";
+@import "@fontsource/vazirmatn/600.css";
+@import "@fontsource/vazirmatn/700.css";
+@import "@fontsource/vazirmatn/800.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: oklch(0.985 0.004 260);
+  --foreground: oklch(0.2 0.015 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.015 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.015 260);
+  /* accent: Vantra gold */
+  --primary: oklch(0.62 0.13 85);
+  --primary-foreground: oklch(0.16 0.012 260);
+  --secondary: oklch(0.94 0.008 260);
+  --secondary-foreground: oklch(0.2 0.015 260);
+  --muted: oklch(0.94 0.008 260);
+  --muted-foreground: oklch(0.48 0.012 260);
+  --accent: oklch(0.9 0.03 85);
+  --accent-foreground: oklch(0.4 0.1 85);
+  --destructive: oklch(0.58 0.2 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.008 260);
+  --input: oklch(0.9 0.008 260);
+  --ring: oklch(0.62 0.13 85);
+  --radius: 0.625rem;
+  --glass-bg: oklch(1 0 0 / 0.7);
+  --glass-border: oklch(0.62 0.13 85 / 0.16);
+  --glow: oklch(0.78 0.125 85);
+  --blue: oklch(0.6 0.1 230);
+}
+
+.dark {
+  --background: oklch(0.16 0.012 260);
+  --foreground: oklch(0.94 0.008 260);
+  --card: oklch(0.205 0.013 258);
+  --card-foreground: oklch(0.94 0.008 260);
+  --popover: oklch(0.205 0.013 258);
+  --popover-foreground: oklch(0.94 0.008 260);
+  --primary: oklch(0.78 0.125 85);
+  --primary-foreground: oklch(0.16 0.012 260);
+  --secondary: oklch(0.205 0.013 258);
+  --secondary-foreground: oklch(0.94 0.008 260);
+  --muted: oklch(0.24 0.014 258);
+  --muted-foreground: oklch(0.62 0.015 260);
+  --accent: oklch(0.78 0.125 85 / 0.14);
+  --accent-foreground: oklch(0.78 0.125 85);
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(1 0 0 / 0.08);
+  --input: oklch(1 0 0 / 0.1);
+  --ring: oklch(0.78 0.125 85);
+  --glass-bg: oklch(0.16 0.012 260 / 0.86);
+  --glass-border: oklch(1 0 0 / 0.08);
+  --glow: oklch(0.78 0.125 85);
+  --blue: oklch(0.76 0.11 230);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-glass: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-glow: var(--glow);
+  --color-blue: var(--blue);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-sm: calc(var(--radius) - 5px);
+  --font-sans: "Manrope", "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-fa: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Manrope", "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+  }
+  html[lang="fa"] body {
+    font-family: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+  }
+  html[lang="en"] body {
+    font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  }
+  /* Code blocks always LTR regardless of page direction, and set apart with mono font */
+  pre, code {
+    direction: ltr;
+    unicode-bidi: isolate;
+    text-align: left;
+    font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  }
+
+  ::selection {
+    background: oklch(0.78 0.125 85 / 0.28);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .glow-ring {
+    box-shadow: 0 0 0 1px var(--glass-border);
+  }
+}
+
+/*
+ * Document typography. Tuned by hand instead of the typography plugin's
+ * generic scale — larger measure, tighter heading tracking, a visible
+ * rhythm between levels, and code that reads as a distinct voice.
+ */
+@layer components {
+  .doc-prose {
+    --tw-prose-body: hsl(var(--foreground) / 0.88);
+    --tw-prose-headings: var(--foreground);
+    --tw-prose-links: var(--primary);
+    --tw-prose-bold: var(--foreground);
+    --tw-prose-counters: var(--muted-foreground);
+    --tw-prose-bullets: var(--primary);
+    --tw-prose-hr: var(--border);
+    --tw-prose-quotes: var(--foreground);
+    --tw-prose-quote-borders: var(--primary);
+    --tw-prose-code: var(--foreground);
+    --tw-prose-th-borders: var(--border);
+    --tw-prose-td-borders: var(--border);
+    max-width: 44rem;
+    font-size: 15.5px;
+    line-height: 2;
+    color: color-mix(in oklch, var(--foreground) 90%, transparent);
+  }
+
+  .doc-prose :is(h1, h2, h3, h4) {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    scroll-margin-top: 5rem;
+    color: var(--foreground);
+  }
+  .doc-prose h1 { font-size: 2.25rem; line-height: 1.2; margin-bottom: 0.5em; font-weight: 800; }
+  .doc-prose h2 {
+    font-size: 21px; line-height: 1.3; margin-top: 2.4em; margin-bottom: 0.7em;
+    padding-bottom: 0.5em; border-bottom: 1px solid var(--border);
+  }
+  .doc-prose h3 { font-size: 1.15rem; line-height: 1.4; margin-top: 2.2em; margin-bottom: 0.7em; }
+  .doc-prose h4 { font-size: 1.02rem; margin-top: 1.8em; margin-bottom: 0.6em; }
+
+  .doc-prose p { margin-top: 1.25em; margin-bottom: 1.25em; }
+
+  .doc-prose :is(ul, ol) { margin-top: 1.1em; margin-bottom: 1.1em; }
+  .doc-prose li { margin-top: 0.4em; margin-bottom: 0.4em; }
+  .doc-prose li::marker { color: color-mix(in oklch, var(--primary) 60%, transparent); }
+
+  .doc-prose a {
+    font-weight: 500; text-decoration-line: underline;
+    text-decoration-color: color-mix(in oklch, var(--primary) 35%, transparent);
+    text-underline-offset: 3px; transition: text-decoration-color 0.15s ease;
+    color: var(--primary);
+  }
+  .doc-prose a:hover { text-decoration-color: var(--primary); }
+
+  .doc-prose strong { font-weight: 700; }
+
+  .doc-prose blockquote {
+    font-style: normal; font-weight: 400; font-size: 1rem;
+    border-inline-start-width: 3px; padding-inline-start: 1.1em;
+    color: color-mix(in oklch, var(--foreground) 75%, transparent);
+  }
+  .doc-prose blockquote p:first-of-type::before,
+  .doc-prose blockquote p:last-of-type::after { content: none; }
+
+  .doc-prose :not(pre) > code {
+    font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+    font-size: 0.85em; font-weight: 500;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.15em 0.4em;
+    color: var(--foreground);
+  }
+  .doc-prose :not(pre) > code::before,
+  .doc-prose :not(pre) > code::after { content: none; }
+
+  .doc-prose hr { margin: 3em 0; border-color: var(--border); }
+
+  .doc-prose img { border-radius: var(--radius-md); border: 1px solid var(--border); }
+
+  .doc-prose table { font-size: 0.92em; }
+  .doc-prose thead th { font-weight: 600; color: var(--foreground); }
+
+  .doc-prose kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8em; background: var(--muted);
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 0.1em 0.45em; box-shadow: 0 1px 0 var(--border);
+  }
+}

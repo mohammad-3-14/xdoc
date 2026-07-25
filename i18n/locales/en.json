@@ -1,0 +1,49 @@
+{
+  "site": {
+    "title": "xDoc"
+  },
+  "nav": {
+    "toggleSidebar": "Sidebar menu",
+    "github": "GitHub"
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "search": {
+    "trigger": "Search documentation...",
+    "placeholder": "Type to search...",
+    "noResults": "No results found.",
+    "hint": "to search"
+  },
+  "theme": {
+    "toggle": "Toggle light/dark mode",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "language": {
+    "switch": "Switch language"
+  },
+  "page": {
+    "lastUpdated": "Last updated",
+    "onThisPage": "On this page",
+    "prev": "Previous",
+    "next": "Next",
+    "home": "Home"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "backHome": "Back to home"
+  },
+  "category": {
+    "browse": "Browse this category"
+  },
+  "home": {
+    "eyebrow": "Documentation Hub",
+    "title": "xDoc Platform Documentation",
+    "subtitle": "A complete guide to my technical notes on frontend, backend, devops, and security.",
+    "pagesCount": "no pages | {count} page | {count} pages",
+    "popular": "Most popular pages",
+    "footer": "xDoc — All rights reserved"
+  }
+}
