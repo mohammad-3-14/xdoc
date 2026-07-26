@@ -41,7 +41,7 @@ const { data: navigation } = await useAsyncData(
 // title/description directly instead of trusting the tree node.
 const { data: categoryPages } = await useAsyncData(
   () => `home-category-pages-${locale.value}`,
-  () => queryCollection(locale.value as 'fa' | 'en').select('path', 'title', 'description').all(),
+  () => queryCollection(locale.value as 'fa' | 'en').select('path', 'title', 'description', 'navigation').all(),
   { watch: [locale] },
 )
 
@@ -50,6 +50,11 @@ function realTitle(path: string, fallback: string) {
 }
 function realDescription(path: string) {
   return categoryPages.value?.find(p => p.path === path)?.description ?? ''
+}
+function realIcon(path: string, fallback?: string) {
+  const nav = categoryPages.value?.find(p => p.path === path)?.navigation
+  const navIcon = typeof nav === 'object' && nav ? (nav as { icon?: string }).icon : undefined
+  return navIcon ?? fallback
 }
 
 // Flatten a category's subtree into leaf pages only. Every folder pushes its own
@@ -91,7 +96,7 @@ const categoryCards = computed(() => categories.value.map((cat, i) => {
     description: realDescription(cat.path),
     tone: monogramFor(i),
     initials: initialsFor(title),
-    icon: resolveIcon(cat.icon),
+    icon: resolveIcon(realIcon(cat.path, cat.icon)),
     docs: leaves.map(d => ({ ...d, visible: matches(d.title) })),
     visible: isFiltering ? visibleLeaves.length > 0 || matches(title) : true,
   }
@@ -100,7 +105,7 @@ const categoryCards = computed(() => categories.value.map((cat, i) => {
 const popularDocs = computed(() => {
   const flat = categories.value.flatMap((cat, i) => {
     const leaves = flattenLeaves(cat.children ?? [], cat.path)
-    return leaves.slice(0, 2).map(d => ({ ...d, catTitle: realTitle(cat.path, cat.title), tone: monogramFor(i), icon: resolveIcon(cat.icon) }))
+    return leaves.slice(0, 2).map(d => ({ ...d, catTitle: realTitle(cat.path, cat.title), tone: monogramFor(i), icon: resolveIcon(realIcon(cat.path, cat.icon)) }))
   })
   return flat.slice(0, 4).map(d => ({ ...d, visible: matches(d.title) }))
 })

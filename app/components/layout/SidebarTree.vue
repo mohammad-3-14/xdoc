@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
-import { ChevronDown } from 'lucide-vue-next'
+import * as icons from 'lucide-vue-next'
+import { ChevronDown, HelpCircle } from 'lucide-vue-next'
+
+type NavItem = ContentNavigationItem & { icon?: string }
 
 const props = defineProps<{
-  items: ContentNavigationItem[]
+  items: NavItem[]
   depth?: number
 }>()
 
@@ -11,6 +14,18 @@ const route = useRoute()
 const { withLocale } = useContentLink()
 const openMap = ref<Record<string, boolean>>({})
 const emit = defineEmits<{ navigate: [] }>()
+
+// Frontmatter stores icons as Iconify-style names (e.g. "i-lucide-network");
+// resolve to the matching lucide-vue-next component, falling back if unknown.
+function resolveIcon(name?: string) {
+  if (!name) return null
+  const pascal = name
+    .replace(/^i-lucide-/, '')
+    .split('-')
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('')
+  return (icons as Record<string, typeof HelpCircle>)[pascal] ?? HelpCircle
+}
 
 function isActive(path: string) {
   return route.path === withLocale(path)
@@ -40,7 +55,10 @@ function toggle(item: ContentNavigationItem) {
           class="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-sm font-medium text-foreground/80 hover:bg-accent hover:text-accent-foreground transition-colors"
           @click="toggle(item)"
         >
-          <span>{{ item.title }}</span>
+          <span class="flex items-center gap-2">
+            <component :is="resolveIcon(item.icon)" v-if="item.icon" class="h-4 w-4 shrink-0" />
+            {{ item.title }}
+          </span>
           <ChevronDown
             class="h-4 w-4 shrink-0 transition-transform"
             :class="{ '-rotate-90 rtl:rotate-90': !isOpen(item) }"
@@ -57,7 +75,10 @@ function toggle(item: ContentNavigationItem) {
             : 'text-foreground/70 hover:bg-accent hover:text-accent-foreground'"
           @click="emit('navigate')"
         >
-          {{ item.title }}
+          <span class="flex items-center gap-2">
+            <component :is="resolveIcon(item.icon)" v-if="item.icon" class="h-4 w-4 shrink-0" />
+            {{ item.title }}
+          </span>
         </NuxtLink>
       </template>
     </li>

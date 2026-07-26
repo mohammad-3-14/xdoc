@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   i18n: {
     locales: [
       { code: 'fa', language: 'fa-IR', dir: 'rtl', name: 'فارسی', file: 'fa.json' },
-      { code: 'en', language: 'en-US', dir: 'ltr', name: 'English', file: 'en.json' },
+      // { code: 'en', language: 'en-US', dir: 'ltr', name: 'English', file: 'en.json' }, // disabled: English temporarily turned off
     ],
     defaultLocale: 'fa',
     strategy: 'prefix',
@@ -39,7 +39,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/fa', '/en', '/api/search/fa', '/api/search/en'],
+      routes: ['/', '/fa', '/api/search/fa'], // '/en', '/api/search/en' disabled along with the en locale
       failOnError: false,
     },
   },

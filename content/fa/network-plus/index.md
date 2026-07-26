@@ -1,48 +1,18 @@
 ---
-title: نتورک پلاس
-description: نکات پایه‌ای امنیت برای اپلیکیشن‌های وب — از XSS تا مدیریت secrets.
-category: security
-tags: [security, web, best-practices]
-date: 2026-03-01
-updatedAt: 2026-06-15
+title: نتورک پلاس چیست؟
+description: معرفی کوتاه مدرک CompTIA Network+ و سرفصل‌های کلی که پوشش می‌دهد
+category: devops
+tags: [network+, comptia, networking]
+date: 2026-07-26
+updatedAt: 2026-07-26
 draft: false
 navigation:
-  title: امنیت
+  title: معرفی
   icon: i-lucide-network
 ---
 
-# اصول امنیت وب
+# نتورک پلاس چیست؟
 
-چند اصل کلیدی که در توسعه هر اپلیکیشن وب باید رعایت شود.
+Network+ یه مدرک پایه از CompTIA هست که دانش عمومی شبکه رو می‌سنجه — نه مخصوص یه vendor خاص (مثل سیسکو)، بلکه مفاهیم کلی‌ای که تو هر محیط شبکه‌ای (خانگی، سازمانی، کلود) کاربرد داره. سطحش entry-level تا intermediate هست و معمولاً قبل از مدارک تخصصی‌تری مثل CCNA میاد. برای کسی که می‌خواد وارد کار IT support، sysadmin، یا هر مسیری بشه که پای شبکه وسطشه، یه پایه محکم و قابل‌اثبات می‌ده.
 
-## جلوگیری از XSS
-
-همیشه ورودی کاربر را قبل از رندر در HTML escape کنید. فریم‌ورک‌هایی مثل Vue به‌صورت پیش‌فرض این کار را در binding های متنی انجام می‌دهند، اما `v-html` این محافظت را دور می‌زند:
-
-```vue
-<!-- خطرناک اگر userContent از کاربر بیاید و sanitize نشده باشد -->
-<div v-html="userContent"></div>
-```
-
-برای HTML پویا از یک کتابخانه sanitize مثل DOMPurify استفاده کنید.
-
-## مدیریت Secrets
-
-- هرگز کلید API یا رمز عبور را در کد commit نکنید.
-- از فایل‌های `.env` (که در `.gitignore` قرار دارند) یا secret manager استفاده کنید.
-- کلیدهای عمومی/قابل افشا (مثل publishable key) را از کلیدهای مخفی جدا نگه دارید.
-
-## هدرهای امنیتی HTTP
-
-```
-Content-Security-Policy: default-src 'self'
-X-Content-Type-Options: nosniff
-X-Frame-Options: DENY
-Referrer-Policy: strict-origin-when-cross-origin
-```
-
-## احراز هویت
-
-- رمزهای عبور را همیشه با الگوریتم‌های مقاوم مثل `bcrypt` یا `argon2` هش کنید — هرگز MD5/SHA1 خام.
-- برای session/token از HttpOnly و Secure cookie استفاده کنید تا در دسترس JavaScript سمت کلاینت نباشد.
-- Rate limiting روی endpoint های ورود برای جلوگیری از brute-force ضروری است.
+داخلش یاد می‌گیری: مدل OSI و TCP/IP، IP addressing و subnetting، انواع توپولوژی و اندازه‌های شبکه (LAN/WAN/...)، پروتکل‌ها و پورت‌های رایج، تجهیزات شبکه (روتر، سوییچ، فایروال، اکسس‌پوینت) و نحوه کانفیگشون، استانداردهای wireless و cabling، مفاهیم cloud و virtualization، مانیتورینگ و مستندسازی شبکه، امنیت شبکه (انواع حمله و hardening)، و در نهایت روش‌شناسی عیب‌یابی مشکلات شبکه.

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Search, Github, Menu } from 'lucide-vue-next'
+import { Search, Github, Menu, FileText } from 'lucide-vue-next'
 
-const { t, locale } = useI18n()
+const { t, locale, locales } = useI18n()
 const route = useRoute()
 const searchOpen = ref(false)
 const emit = defineEmits<{ 'toggle-sidebar': [] }>()
@@ -27,7 +27,9 @@ const isHome = computed(() => {
       </UiButton>
 
       <NuxtLinkLocale to="/" class="flex items-center gap-2.5 font-bold tracking-tight">
-        <span class="flex h-8.5 w-8.5 items-center justify-center rounded-[9px] bg-primary font-mono text-base font-extrabold text-primary-foreground">V</span>
+        <span class="flex h-8.5 w-8.5 items-center justify-center rounded-[9px] bg-primary text-primary-foreground">
+          <FileText class="h-4.5 w-4.5" />
+        </span>
         <span>{{ t('site.title') }}</span>
       </NuxtLinkLocale>
 
@@ -45,7 +47,7 @@ const isHome = computed(() => {
         <UiButton variant="ghost" size="icon" class="sm:hidden" :aria-label="t('search.trigger')" @click="searchOpen = true">
           <Search class="h-4 w-4" />
         </UiButton>
-        <LayoutLanguageSwitcher />
+        <LayoutLanguageSwitcher v-if="locales.length > 1" />
         <LayoutThemeToggle />
         <UiButton as="a" href="https://github.com" target="_blank" rel="noopener" variant="ghost" size="icon" :aria-label="t('nav.github')">
           <Github class="h-4 w-4" />

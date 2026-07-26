@@ -60,7 +60,7 @@ useSeoMeta({
   <div v-if="page" class="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1fr)_14rem]">
     <article class="min-w-0">
       <ContentBreadcrumb :path="contentPath" class="mb-4" />
-      <h1 class="text-4xl font-bold tracking-tight text-balance">{{ page.title }}</h1>
+      <h1 class="text-2xl font-bold tracking-tight text-balance">{{ page.title }}</h1>
       <p v-if="page.description" class="mt-3 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">{{ page.description }}</p>
       <ContentLastUpdated :date="page.updatedAt" class="mt-4" />
 
