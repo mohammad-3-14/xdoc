@@ -49,7 +49,7 @@ const isHome = computed(() => {
         </UiButton>
         <LayoutLanguageSwitcher v-if="locales.length > 1" />
         <LayoutThemeToggle />
-        <UiButton as="a" href="https://github.com" target="_blank" rel="noopener" variant="ghost" size="icon" :aria-label="t('nav.github')">
+        <UiButton as="a" href="https://github.com/mohammad-3-14/xdoc" target="_blank" rel="noopener" variant="ghost" size="icon" :aria-label="t('nav.github')">
           <Github class="h-4 w-4" />
         </UiButton>
       </div>
